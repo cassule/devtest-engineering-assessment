@@ -3,10 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './api/users/users.module';
 import { AuthModule } from './api/auth/auth.module';
-import { User } from './api/users/entities/user.entity';
 import { EmailModule } from './email/email.module';
 import { JobModule } from './api/job/job.module';
-import { Job } from './api/job/entities/job.entity';
 
 @Module({
   imports: [
@@ -22,7 +20,7 @@ import { Job } from './api/job/entities/job.entity';
       password: process.env.DB_PASSWORD || '',
       database: process.env.DB_NAME || 'test',
       autoLoadEntities: true,
-      entities: [User, Job],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
     UsersModule,
