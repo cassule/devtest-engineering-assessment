@@ -27,9 +27,4 @@ export class UsersController {
   async getProfile(@Request() req): Promise<User> {
     return req.user;
   }
-
-  @Post()
-  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.usersService.create(createUserDto);
-  }
 }

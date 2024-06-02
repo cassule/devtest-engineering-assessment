@@ -1,12 +1,14 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 import { JobService } from './job.service';
 import { ApiTags, ApiQuery, ApiParam } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('jobs')
 @Controller('api/jobs')
 export class JobController {
   constructor(private readonly jobService: JobService) { }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
   @ApiQuery({ name: 'limit', required: false, type: Number, example: 10 })
@@ -24,6 +26,7 @@ export class JobController {
     return this.jobService.findAll(page, limit, filters);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   @ApiParam({ name: 'id', required: true, type: String })
   async findOne(@Param('id') id: string) {
