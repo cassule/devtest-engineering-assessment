@@ -47,4 +47,8 @@ export class UsersService {
 
     return this.usersRepository.save(user);
   }
+
+  async updatePassword(id: string, newPassword: string): Promise<void> {
+    await this.usersRepository.update(id, { password: newPassword });
+  }
 }
