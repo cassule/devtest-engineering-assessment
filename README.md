@@ -1,1 +1,1 @@
-# Jobs Finder Api
+# Job Finder Api
