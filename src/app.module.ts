@@ -5,6 +5,8 @@ import { UsersModule } from './api/users/users.module';
 import { AuthModule } from './api/auth/auth.module';
 import { User } from './api/users/entities/user.entity';
 import { EmailModule } from './email/email.module';
+import { JobModule } from './api/job/job.module';
+import { Job } from './api/job/entities/job.entity';
 
 @Module({
   imports: [
@@ -20,12 +22,13 @@ import { EmailModule } from './email/email.module';
       password: process.env.DB_PASSWORD || '',
       database: process.env.DB_NAME || 'test',
       autoLoadEntities: true,
-      entities: [User],
+      entities: [User, Job],
       synchronize: true,
     }),
     UsersModule,
     AuthModule,
     EmailModule,
+    JobModule
   ],
 })
 export class AppModule { }
